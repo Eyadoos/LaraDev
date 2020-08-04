@@ -1,0 +1,47 @@
+# Composer and npm dependencies
+/vendor
+/node_modules
+
+# Text file containing information about the current branch
+gitrevision.txt
+
+# Webpack generated files
+public/*.js
+public/*.css
+public/*.map
+public/fonts
+public/static.css
+public/static.js
+public/assets-manifest.php
+Lara.iml
+yarn.lock
+
+package-lock.json
+
+# Configuration files
+.htpasswd
+.env
+.env-prod
+.env-local
+
+# Composer specific files
+composer.phar
+composer.lock
+
+# Login stuff should not be public
+config/bcLDAP.php
+# stuff for bd infratructure is not public
+config/bd_credentials.php
+# passwords of BD/Bergfest users
+config/bd_users.initial.php
+config/bergfest_users.initial.php
+
+# IDE related files
+.idea/
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+# Misc
+.DS_Store
+Thumbs.db

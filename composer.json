@@ -1,0 +1,76 @@
+{
+    "authors": [
+        {
+            "email": "4d44h@protonmail.com",
+            "name": "Maxim Drachinskiy",
+            "role": "Project Manager"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "Lara\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "description": "A calender with personnel scheduling for club management, built on top of Laravel 5.",
+    "keywords": [
+        "calendar",
+        "scheduling",
+        "Lara",
+        "ILSCeV"
+    ],
+    "license": "GPL-3.0",
+    "name": "ilsc-ev/lara",
+    "require": {
+        "php": ">=7.1.3",
+        "barryvdh/laravel-ide-helper": "^2.6",
+        "berkayk/onesignal-laravel": "^1.0",
+        "eluceo/ical": "^0.11.6",
+        "johngrogg/ics-parser": "^2",
+        "laravel/framework": "5.8.*",
+        "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.8.0",
+        "rap2hpoutre/laravel-log-viewer": "^0.8.1"
+    },
+    "require-dev": {
+        "doctrine/dbal": "^2.9",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "orangehill/iseed": "dev-master",
+        "phpunit/phpunit": "~6.0",
+        "filp/whoops": "~2.4"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
+        ],
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "type": "project"
+}
