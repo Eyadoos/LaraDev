@@ -109,7 +109,7 @@ class ShiftController extends Controller
 
         // Find the corresponding shift object
         $shift = Shift::where('id', '=', $shiftId)->first();
-
+        
         // Remember old value for logging
         $oldPerson = $shift->getPerson;
         $oldComment = $shift->comment;
@@ -156,7 +156,6 @@ class ShiftController extends Controller
         // Case ADDED:     Entry was empty, new data entered                -> add new data
         // Case DELETED:   Entry was not empty, shift is empty now          -> delete old data
         // Case CHANGED:   Entry was not empty, new name entered            -> delete old data, then add new data
-
 
         if( !isset($shift->person_id) )
         {
@@ -274,6 +273,14 @@ class ShiftController extends Controller
         // Formulate the response
         $prsn_ldap_id = is_null($shift->getPerson()->first()) ? "" : $shift->getPerson()->first()->prsn_ldap_id;
         $user = Auth::user();
+        \OneSignal::sendNotificationToExternalUser(
+            "You were added to a new shift",
+            $shift->person_id,
+            $url = null,
+            $data = null,
+            $buttons = null,
+            $schedule = null
+        );
         return response()->json([
             "entryId"           => $shift->id,
             "userStatus"        => $userStatus,

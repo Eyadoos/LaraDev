@@ -173,13 +173,6 @@ class ClubEventController extends Controller
         $createClubEvent = true;
         $eventUrl = '';
 
-        \OneSignal::sendNotificationToAll(
-            "New Event is Created ",
-            $url = null,
-            $data = null,
-            $buttons = null,
-            $schedule = null
-        );
 
         return View::make('clubevent.createClubEventView', compact('sections', 'shiftTypes', 'templates',
                                                          'shifts', 'title', 'subtitle', 'type',
@@ -224,6 +217,18 @@ class ClubEventController extends Controller
             $newEvent->template_id = $template->id;
             $newEvent->save();
         }
+
+        
+        \OneSignal::sendNotificationUsingTags(
+            "New event: ".$newEvent->evnt_title." was created at ".$newEvent->section->title, //Show event name at event place
+            array(
+                ["field" => "tag", "key" => "Segment", "relation" => "=", "value" => $newEvent->plc_id]
+            ),
+            $url = null,
+            $data = null,
+            $buttons = null,
+            $schedule = null
+        );
 
         // show new event
         return Redirect::action('ClubEventController@show', array('id' => $newEvent->id));

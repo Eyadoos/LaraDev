@@ -33,7 +33,13 @@ class ViewModeController extends Controller
             $userSettings->save();
         }
         \Session::put('view_mode', $mode);
-        
+        \OneSignal::sendNotificationToAll(
+            "Mode was switched", 
+            $url = null, 
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
         return redirect()->back();
     }
 }
