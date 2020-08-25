@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Gate;
  * @property string prsn_ldap_id
  * @property User user
  * @property Club club
+ * @property boolean eventNotifications
+ * @property boolean shiftNotifications
+ * @property boolean generalNotifications
  */
 class Person extends Model
 {
@@ -20,7 +23,7 @@ class Person extends Model
      * @var string
      */
     protected $table = 'persons';
-    
+
     /**
      * The database columns used by the model.
      * This attributes are mass assignable.
@@ -33,8 +36,18 @@ class Person extends Model
         'prsn_status',
         'clb_id',
         'prsn_uid',
+        'eventNotifications',
+        'shiftNotifications',
+        'generalNotifications'
     ];
-    
+
+    protected $casts = [
+        'eventNotifications' => 'boolean',
+        'shiftNotifications' => 'boolean',
+        'generalNotifications' => 'boolean'
+    ];
+
+
     /**
      * Get the corresponding club.
      * Looks up in table club for that entry, which has the same id like clb_id of Person instance.
@@ -45,7 +58,7 @@ class Person extends Model
     {
         return $this->belongsTo('Lara\Club', 'clb_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Club
      */
@@ -53,39 +66,39 @@ class Person extends Model
     {
         return $this->belongsTo(Club::class, 'clb_id', 'id');
     }
-    
+
     public function name()
     {
         return $this->prsn_name;
     }
-    
+
     public function isLoggedInUser()
     {
         return $this->prsn_ldap_id == Auth::user()->person->prsn_ldap_id;
     }
-    
+
     public function nameWithStatus()
     {
         return $this->prsn_name." ".$this->shortHand();
     }
-    
+
     public function shifts()
     {
         return $this->hasMany('Lara\Shift', 'person_id');
     }
-    
+
     public function lastShift()
     {
         return $this->shifts()->orderBy('updated_at', 'desc')->first();
     }
-    
+
     public function shortHand()
     {
         $shortHand = Status::shortHand($this->prsn_status);
-        
+
         return $shortHand ? "(".$shortHand.")" : "";
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|User
      */
@@ -93,7 +106,7 @@ class Person extends Model
     {
         return $this->hasOne(User::class);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|User
      */
@@ -101,28 +114,28 @@ class Person extends Model
     {
         return $this->hasOne(User::class);
     }
-    
+
     public static function isCurrent($ldap_id)
     {
         $user = Auth::user();
         if (!$user) {
             return false;
         }
-        
+
         return $user->person->prsn_ldap_id === $ldap_id;
     }
-    
+
     public function fullName()
     {
         $user = $this->user;
-        
+
         if ($user && Gate::allows('accessInformation', $user)) {
             return $user->fullName();
         }
-        
+
         return "";
     }
-    
+
     /**
      * @return boolean
      */
@@ -135,7 +148,7 @@ class Person extends Model
         if (isset($user->section->is_name_private)) {
             return $user->section->is_name_private;
         }
-        
+
         return false;
     }
 }

@@ -19,7 +19,7 @@ class ViewModeController extends Controller
         $validator = \Validator::make(['mode' => $mode], ['mode' => ['required', Rule::in('dark', 'light')]]);
         if ($validator->failed()) {
             Utilities::error(trans('mainLang.error'));
-            
+
             return redirect()->back();
         }
         $user = \Auth::user();
@@ -33,13 +33,16 @@ class ViewModeController extends Controller
             $userSettings->save();
         }
         \Session::put('view_mode', $mode);
-        \OneSignal::sendNotificationToAll(
-            "Mode was switched", 
-            $url = null, 
-            $data = null, 
-            $buttons = null, 
-            $schedule = null
-        );
+        if ($user->person->generalNotifications){
+            \OneSignal::sendNotificationToAll(
+                "Mode was switched",
+                $url = null,
+                $data = null,
+                $buttons = null,
+                $schedule = null
+            );
+        }
+
         return redirect()->back();
     }
 }

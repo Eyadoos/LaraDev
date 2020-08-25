@@ -19,9 +19,6 @@ use Lara\utilities\RoleUtility;
  * @property string status
  * @property string givenname
  * @property string lastname
- * @property boolean eventNotifications
- * @property boolean shiftNotifications
- * @property boolean generalNotifications
  * @property \Illuminate\Database\Eloquent\Relations\belongsToMany|Role roles
  * @property bool is_name_private
  * @property Section section
@@ -48,10 +45,7 @@ class User extends Authenticatable
         'givenname',
         'lastname',
         'is_name_private',
-        'on_leave',
-        'eventNotifications',
-        'shiftNotifications',
-        'generalNotifications'
+        'on_leave'
     ];
 
     /**
@@ -68,10 +62,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'is_name_private' => 'boolean',
-        'eventNotifications' => 'boolean',
-        'shiftNotifications' => 'boolean',
-        'generalNotifications' => 'boolean'
+        'is_name_private' => 'boolean'
     ];
 
     /**

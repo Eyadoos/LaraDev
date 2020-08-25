@@ -13,7 +13,7 @@ class AddNotification extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('persons', function (Blueprint $table) {
             $table->boolean('eventNotifications')->default(1);
             $table->boolean('shiftNotifications')->default(1);
             $table->boolean('generalNotifications')->default(1);
@@ -27,7 +27,7 @@ class AddNotification extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('persons', function (Blueprint $table) {
             $table->dropColumn('eventNotifications');
             $table->dropColumn('shiftNotifications');
             $table->dropColumn('generalNotifications');
