@@ -87,6 +87,66 @@
                                         {{ trans('mainLang.privateClubNameNo') }}
                                     </label>
                                 </div>
+                            <br>
+                            <br>
+                            <label for="privateClubName">
+                                <strong>{{ trans('mainLang.generalNotifications') }}</strong>
+                            </label>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'generalNotifications','false', !is_null($user->person->generalNotifications ) && $user->person->generalNotifications == 0 ) !!}
+                                    {{ trans('mainLang.no') }}
+                                </label>
+                            </div>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'generalNotifications','true', !is_null($user->person->generalNotifications ) && $user->person->generalNotifications == 1 ) !!}
+                                    {{ trans('mainLang.yes') }}
+                                </label>
+                            </div>
+
+                            <br>
+                            <br>
+                            <label for="privateClubName">
+                                <strong>{{ trans('mainLang.eventNotifications') }}</strong>
+                            </label>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'eventNotifications','false', !is_null($user->person->eventNotifications ) && $user->person->eventNotifications == 0 ) !!}
+                                    {{ trans('mainLang.no') }}
+                                </label>
+                            </div>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'eventNotifications','true', !is_null($user->person->eventNotifications ) && $user->person->eventNotifications == 1 ) !!}
+                                    {{ trans('mainLang.yes') }}
+                                </label>
+                            </div>
+
+                            <br>
+                            <br>
+                            <label for="privateClubName">
+                                <strong>{{ trans('mainLang.shiftNotifications') }}</strong>
+                            </label>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'shiftNotifications','false', !is_null($user->person->shiftNotifications ) && $user->person->shiftNotifications == 0 ) !!}
+                                    {{ trans('mainLang.no') }}
+                                </label>
+                            </div>
+                            <br class="d-block d-md-none d-lg-none">
+                            <div class="form-check-inline">
+                                <label class="form-check">
+                                    {!! Form::radio( 'shiftNotifications','true', !is_null($user->person->shiftNotifications ) && $user->person->shiftNotifications == 1 ) !!}
+                                    {{ trans('mainLang.yes') }}
+                                </label>
+                            </div>
+
                                 <br>
                                 <br>
                                 <div class="btn-group btn-group-sm">

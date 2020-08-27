@@ -509,6 +509,9 @@ return [
     'privateClubNameNo'             => 'No, everyone can see my clubname',
     'privateClubNameNull'           => 'Use my section\'s default setting',
     'upcomingShifts'                => 'Upcoming shifts',
+    'generalNotifications'          => 'Should I receive General Notifications?',
+    'shiftNotifications'            => 'Should I receive Shift Notifications?',
+    'eventNotifications'            => 'Should I receive Event Notifications?',
 
     //////////
     // ICal //

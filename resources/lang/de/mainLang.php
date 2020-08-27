@@ -511,6 +511,10 @@ return [
     'privateClubNameNo'             => 'Nein, jeder darf meinen Clubnamen sehen',
     'privateClubNameNull'           => 'Sektionsvorgabe verwenden',
     'upcomingShifts'                => 'Bevorstehende Dienste',
+    'generalNotifications'          => 'Soll ich allgemeine Benachrichtigungen erhalten?',
+    'shiftNotifications'            => 'Sollte ich Schicht-Benachrichtigungen erhalten?',
+    'eventNotifications'            => 'Soll ich Ereignisbenachrichtigungen erhalten?',
+
 
     //////////
     // ICal //

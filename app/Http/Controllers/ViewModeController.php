@@ -33,16 +33,19 @@ class ViewModeController extends Controller
             $userSettings->save();
         }
         \Session::put('view_mode', $mode);
-        if ($user->person->generalNotifications){
-            \OneSignal::sendNotificationToAll(
-                "Mode was switched",
-                $url = null,
-                $data = null,
-                $buttons = null,
-                $schedule = null
-            );
+        $persons = \DB::table('persons')->get();
+        foreach ($persons as $person) {
+            if ($person->generalNotifications) {
+                \OneSignal::sendNotificationToExternalUser(
+                    "Mode was switched",
+                    $person->id,
+                    $url = null,
+                    $data = null,
+                    $buttons = null,
+                    $schedule = null
+                );
+            }
         }
-
         return redirect()->back();
     }
 }
