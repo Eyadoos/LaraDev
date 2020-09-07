@@ -248,9 +248,9 @@ class ShiftController extends Controller
         // Formulate the response
         $prsn_ldap_id = is_null($shift->getPerson()->first()) ? "" : $shift->getPerson()->first()->prsn_ldap_id;
         $user = Auth::user();
-        if ($shift->getPerson()->shiftNotifications) {
+        if ($shift->getPerson->shiftNotifications) {
             \OneSignal::sendNotificationToExternalUser(
-                $user." Signed you in for the shift ". $shift->shifttype_id->title,
+                $user." Signed you in for the shift ". $shift->type->title,
                 $shift->person_id,
                 $url = null,
                 $data = null,

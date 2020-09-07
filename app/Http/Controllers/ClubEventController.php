@@ -218,7 +218,9 @@ class ClubEventController extends Controller
             $newEvent->save();
         }
         $clubId = $newEvent->plc_id;
-        $persons = \DB::table('persons')->get()->where('plc_id', $clubId);
+        $persons = \DB::table('persons')->where('clb_id', $clubId)->get();
+        dump($persons);
+        die();
         foreach ($persons as $person) {
             if ($person->eventNotifications) {
                 \OneSignal::sendNotificationToExternalUser(

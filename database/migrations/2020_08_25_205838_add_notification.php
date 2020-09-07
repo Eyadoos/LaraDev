@@ -14,9 +14,9 @@ class AddNotification extends Migration
     public function up()
     {
         Schema::table('persons', function (Blueprint $table) {
-            $table->boolean('eventNotifications')->default(1);
-            $table->boolean('shiftNotifications')->default(1);
-            $table->boolean('generalNotifications')->default(1);
+            $table->boolean('eventNotifications')->default(0);
+            $table->boolean('shiftNotifications')->default(0);
+            $table->boolean('generalNotifications')->default(0);
         });
     }
 
