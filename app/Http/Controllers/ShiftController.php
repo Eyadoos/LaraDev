@@ -250,7 +250,7 @@ class ShiftController extends Controller
         $user = Auth::user();
         if ($shift->getPerson->shiftNotifications) {
             \OneSignal::sendNotificationToExternalUser(
-                $user." Signed you in for the shift ". $shift->type->title,
+                $user->name." Signed you in for the shift ". $shift->type->title,
                 $shift->person_id,
                 $url = null,
                 $data = null,
