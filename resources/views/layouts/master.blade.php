@@ -31,10 +31,12 @@
         <![endif]-->
         @php($clubId = '')
         @php($personId = '')
+        @php($generalNotifications = 0)
 
         @auth
             @php($clubId =  Auth::user()->person->clb_id )
             @php($personId =  Auth::user()->person->id )
+            @php($generalNotifications =  Auth::user()->person->generalNotifications ? '1' : '0' )
         @endauth
 
         <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
@@ -44,10 +46,12 @@
         if (userLoggedIn) {
             let personId = '{{ $personId }}';
             let userClubId = '{{ $clubId }}';
+            let generalNotifications = '{{ $generalNotifications }}';
             OneSignal.push(function () {
                 OneSignal.init({
                     appId: "6b078023-5746-4a90-b0b5-21786320952b",
                 });
+                OneSignal.sendTag("generalNotifications",generalNotifications);
             });
             OneSignal.push(function() {
                 OneSignal.on('subscriptionChange', function(isSubscribed) {
@@ -55,12 +59,13 @@
                         OneSignal.push(function() {
                             OneSignal.setExternalUserId(personId);
                             OneSignal.sendTag("Segment",userClubId);
+                            OneSignal.sendTag("generalNotifications",generalNotifications);
                         });
                     }
                 });
-            }); 
+            });
         }
-      
+
     </script>
 	</head>
 

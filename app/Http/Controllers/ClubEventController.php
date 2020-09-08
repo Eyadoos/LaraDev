@@ -230,17 +230,6 @@ class ClubEventController extends Controller
                     $schedule = null
                 );
             }
-
-//            \OneSignal::sendNotificationUsingTags(
-//                "New event: ".$newEvent->evnt_title." was created at ".$newEvent->section->title, //Show event name at event place
-//                array(
-//                    ["field" => "tag", "key" => "Segment", "relation" => "=", "value" => $clubId]
-//                ),
-//                $url = null,
-//                $data = null,
-//                $buttons = null,
-//                $schedule = null
-//            );
         }
 
 
